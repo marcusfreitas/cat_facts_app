@@ -1,10 +1,10 @@
 package com.example.catfactsapp.ui.home
 
-import com.example.catfactsapp.repository.remote.CatFactsApi
-import com.example.catfactsapp.repository.remote.datamodel.CatFactsResponse
-import com.example.catfactsapp.repository.remote.datamodel.FactDataModel
-import com.example.catfactsapp.repository.remote.datamodel.NameDataModel
-import com.example.catfactsapp.repository.remote.datamodel.UserDataModel
+import com.example.catfactsapp.repository.remote.catfacts.CatFactsApi
+import com.example.catfactsapp.repository.remote.catfacts.datamodel.CatFactsResponse
+import com.example.catfactsapp.repository.remote.catfacts.datamodel.FactDataModel
+import com.example.catfactsapp.repository.remote.catfacts.datamodel.NameDataModel
+import com.example.catfactsapp.repository.remote.catfacts.datamodel.UserDataModel
 import com.example.catfactsapp.schedulers.TrampolineSchedulerProvider
 import com.example.catfactsapp.ui.home.contract.HomeContract
 import com.example.catfactsapp.ui.home.presenter.HomePresenter

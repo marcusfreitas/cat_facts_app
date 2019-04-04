@@ -1,7 +1,7 @@
 package com.example.catfactsapp.ui.home.presenter
 
-import com.example.catfactsapp.repository.remote.CatFactsApi
-import com.example.catfactsapp.repository.remote.datamodel.FactDataModel
+import com.example.catfactsapp.repository.remote.catfacts.CatFactsApi
+import com.example.catfactsapp.repository.remote.catfacts.datamodel.FactDataModel
 import com.example.catfactsapp.schedulers.BaseSchedulerProvider
 import com.example.catfactsapp.ui.home.contract.HomeContract
 import io.reactivex.disposables.CompositeDisposable

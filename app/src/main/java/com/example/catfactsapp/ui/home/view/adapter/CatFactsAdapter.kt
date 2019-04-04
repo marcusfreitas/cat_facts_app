@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.catfactsapp.R
-import com.example.catfactsapp.repository.remote.datamodel.FactDataModel
+import com.example.catfactsapp.repository.remote.catfacts.datamodel.FactDataModel
 import kotlinx.android.synthetic.main.item_list_content.view.*
 
 class CatFactsAdapter (
@@ -23,8 +23,8 @@ class CatFactsAdapter (
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.idView.text = item.text
-        holder.contentView.text = item.upvotes.toString()
+        holder.factText.text = item.text
+        holder.factUpvotes.text = item.upvotes.toString()
 
         with(holder.itemView) {
             tag = item
@@ -35,7 +35,7 @@ class CatFactsAdapter (
     override fun getItemCount() = values.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val idView: TextView = view.id_text
-        val contentView: TextView = view.content
+        val factText: TextView = view.fact_text
+        val factUpvotes: TextView = view.fact_upvotes
     }
 }

@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.example.catfactsapp.R
-import com.example.catfactsapp.repository.remote.datamodel.FactDataModel
+import com.example.catfactsapp.repository.remote.catfacts.datamodel.FactDataModel
 import com.example.catfactsapp.ui.home.contract.HomeContract
 import com.example.catfactsapp.ui.home.view.adapter.CatFactsAdapter
 import com.example.catfactsapp.ui.home.view.fragment.ItemDetailFragment
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_item_list.*
 import kotlinx.android.synthetic.main.item_list.*
 import org.jetbrains.anko.indeterminateProgressDialog
@@ -23,6 +24,9 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        AndroidInjection.inject(this)
+
         setContentView(R.layout.activity_item_list)
 
         setSupportActionBar(toolbar)

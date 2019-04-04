@@ -1,6 +1,6 @@
 package com.example.catfactsapp.ui.home.contract
 
-import com.example.catfactsapp.repository.remote.datamodel.FactDataModel
+import com.example.catfactsapp.repository.remote.catfacts.datamodel.FactDataModel
 
 interface HomeContract {
 

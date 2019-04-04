@@ -1,4 +1,4 @@
-package com.example.catfactsapp.repository.remote.datamodel
+package com.example.catfactsapp.repository.remote.catfacts.datamodel
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
