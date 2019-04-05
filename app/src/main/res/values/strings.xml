@@ -6,4 +6,5 @@
     <string name="error_load_data">Error trying to load the data</string>
     <string name="detail_fragment_title">Cat Fact</string>
     <string name="cat_image_description">Cat avatar</string>
+    <string name="cat_facts_share_subject">Cat Facts</string>
 </resources>
