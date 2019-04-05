@@ -1,13 +1,14 @@
 package com.example.catfactsapp.ui.home.presenter
 
-import com.example.catfactsapp.repository.remote.catfacts.CatFactsApi
-import com.example.catfactsapp.repository.remote.catfacts.datamodel.FactDataModel
+import com.example.catfactsapp.domain.CatFactUseCase
+import com.example.catfactsapp.domain.model.CatFactModel
 import com.example.catfactsapp.schedulers.BaseSchedulerProvider
 import com.example.catfactsapp.ui.home.contract.HomeContract
 import io.reactivex.disposables.CompositeDisposable
 
-class HomePresenter(private val api: CatFactsApi,
-                    private val schedulerProvider: BaseSchedulerProvider) : HomeContract.Presenter {
+class HomePresenter(
+    private val useCase: CatFactUseCase,
+    private val schedulerProvider: BaseSchedulerProvider) : HomeContract.Presenter {
 
     var view: HomeContract.View? = null
     private val compositeDisposable = CompositeDisposable()
@@ -23,11 +24,12 @@ class HomePresenter(private val api: CatFactsApi,
 
     override fun loadData() {
         view?.showProgressDialog()
-        compositeDisposable.add(api.getFacts()
+        compositeDisposable.add(
+            useCase.getFacts()
             .observeOn(schedulerProvider.ui())
             .subscribeOn(schedulerProvider.io())
             .subscribe({ data ->
-                view?.showData(data.all)
+                view?.showData(data)
                 view?.closeProgressDialog()
             }, {
                 view?.closeProgressDialog()
@@ -36,7 +38,7 @@ class HomePresenter(private val api: CatFactsApi,
         )
     }
 
-    override fun onItemClick(item: FactDataModel) {
+    override fun onItemClick(item: CatFactModel) {
         view?.openDetailActivity(item)
     }
 }

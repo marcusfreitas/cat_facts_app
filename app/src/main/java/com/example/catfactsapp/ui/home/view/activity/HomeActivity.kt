@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.example.catfactsapp.R
-import com.example.catfactsapp.repository.remote.catfacts.datamodel.FactDataModel
+import com.example.catfactsapp.domain.model.CatFactModel
 import com.example.catfactsapp.ui.home.contract.HomeContract
 import com.example.catfactsapp.ui.home.view.adapter.CatFactsAdapter
 import com.example.catfactsapp.ui.home.view.fragment.ItemDetailFragment
@@ -37,10 +37,10 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
         presenter.loadData()
     }
 
-    override fun showData(data: List<FactDataModel>) {
+    override fun showData(data: List<CatFactModel>) {
         val adapter = CatFactsAdapter(data)
         adapter.onClickListener = View.OnClickListener { v ->
-            presenter.onItemClick(v.tag as FactDataModel)
+            presenter.onItemClick(v.tag as CatFactModel)
         }
         item_list.adapter = adapter
     }
@@ -59,7 +59,7 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
         toast(getString(R.string.error_load_data))
     }
 
-    override fun openDetailActivity(factDataModel: FactDataModel) {
-        startActivity(intentFor<ItemDetailActivity>(ItemDetailFragment.ARG_ITEM to factDataModel))
+    override fun openDetailActivity(catFactModel: CatFactModel) {
+        startActivity(intentFor<ItemDetailActivity>(ItemDetailFragment.ARG_ITEM to catFactModel))
     }
 }

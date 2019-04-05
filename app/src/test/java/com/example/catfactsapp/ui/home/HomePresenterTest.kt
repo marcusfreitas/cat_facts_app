@@ -1,10 +1,7 @@
 package com.example.catfactsapp.ui.home
 
-import com.example.catfactsapp.repository.remote.catfacts.CatFactsApi
-import com.example.catfactsapp.repository.remote.catfacts.datamodel.CatFactsResponse
-import com.example.catfactsapp.repository.remote.catfacts.datamodel.FactDataModel
-import com.example.catfactsapp.repository.remote.catfacts.datamodel.NameDataModel
-import com.example.catfactsapp.repository.remote.catfacts.datamodel.UserDataModel
+import com.example.catfactsapp.domain.CatFactUseCase
+import com.example.catfactsapp.domain.model.CatFactModel
 import com.example.catfactsapp.schedulers.TrampolineSchedulerProvider
 import com.example.catfactsapp.ui.home.contract.HomeContract
 import com.example.catfactsapp.ui.home.presenter.HomePresenter
@@ -20,18 +17,17 @@ class HomePresenterTest {
     private lateinit var presenter: HomePresenter
 
     private val mockView: HomeContract.View = mock()
-    private val mockApi: CatFactsApi = mock()
+    private val mockUseCase: CatFactUseCase = mock()
     private val schedulerProvider = TrampolineSchedulerProvider()
     private val factList = listOf(
-        FactDataModel("funny cat fact", 10, UserDataModel(NameDataModel("Marcus", "Freitas"))),
-        FactDataModel("even funnier cat fact", 50, UserDataModel(NameDataModel("Marcus", "Freitas"))),
-        FactDataModel("the funniest cat fact ever!", 1000, UserDataModel(NameDataModel("Marcus", "Freitas")))
+        CatFactModel("funny cat fact", 10),
+        CatFactModel("even funnier cat fact", 50),
+        CatFactModel("the funniest cat fact ever!", 1000)
     )
-    private val response = CatFactsResponse(all = factList)
 
     @Before
     fun setUp() {
-        presenter = HomePresenter(mockApi, schedulerProvider)
+        presenter = HomePresenter(mockUseCase, schedulerProvider)
     }
 
     @Test
@@ -55,7 +51,7 @@ class HomePresenterTest {
     @Test
     fun `successfully load data`() {
         //given
-        whenever(mockApi.getFacts()).thenReturn(Observable.just(response))
+        whenever(mockUseCase.getFacts()).thenReturn(Observable.just(factList))
         presenter.attach(mockView)
 
         //when
@@ -63,15 +59,15 @@ class HomePresenterTest {
 
         //then
         then(mockView).should().showProgressDialog()
-        then(mockApi).should().getFacts()
-        then(mockView).should().showData(response.all)
+        then(mockUseCase).should().getFacts()
+        then(mockView).should().showData(factList)
         then(mockView).should().closeProgressDialog()
     }
 
     @Test
     fun `load data fails`() {
         //given
-        whenever(mockApi.getFacts()).thenReturn(Observable.error(Throwable("Load data failed")))
+        whenever(mockUseCase.getFacts()).thenReturn(Observable.error(Throwable("Load data failed")))
         presenter.attach(mockView)
 
         //when
@@ -79,7 +75,7 @@ class HomePresenterTest {
 
         //then
         then(mockView).should().showProgressDialog()
-        then(mockApi).should().getFacts()
+        then(mockUseCase).should().getFacts()
         then(mockView).should().showLoadDataError()
         then(mockView).should().closeProgressDialog()
     }

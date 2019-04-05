@@ -19,9 +19,9 @@ class ItemDetailActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             val fragment = ItemDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putString(
+                    putParcelable(
                         ItemDetailFragment.ARG_ITEM,
-                        intent.getStringExtra(ItemDetailFragment.ARG_ITEM)
+                        intent.getParcelableExtra(ItemDetailFragment.ARG_ITEM)
                     )
                 }
             }

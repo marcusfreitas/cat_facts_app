@@ -20,7 +20,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-        />
+                android:contentDescription="@string/cat_image_description"/>
 
         <TextView
                 android:id="@+id/fact_text"
@@ -29,6 +29,8 @@
                 android:layout_margin="@dimen/text_margin"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:gravity="center"
+                android:maxLines="4"
+                android:ellipsize="end"
                 app:layout_constraintStart_toEndOf="@id/cat_image"
                 app:layout_constraintEnd_toStartOf="@id/fact_upvotes"
                 app:layout_constraintTop_toTopOf="parent"

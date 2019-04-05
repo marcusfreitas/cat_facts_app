@@ -6,7 +6,7 @@ import retrofit2.http.GET
 
 interface CatFactsApi {
 
-    @GET("/facts?animalType=cat")
+    @GET("/facts")
     fun getFacts(): Observable<CatFactsResponse>
 
 }

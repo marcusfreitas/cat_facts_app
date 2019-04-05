@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.catfactsapp.R
-import com.example.catfactsapp.repository.remote.catfacts.datamodel.FactDataModel
+import com.example.catfactsapp.domain.model.CatFactModel
 import kotlinx.android.synthetic.main.item_list_content.view.*
 
 class CatFactsAdapter (
-    private val values: List<FactDataModel>) :
+    private val values: List<CatFactModel>
+) :
     RecyclerView.Adapter<CatFactsAdapter.ViewHolder>() {
 
     var onClickListener: View.OnClickListener? = null
@@ -23,7 +24,7 @@ class CatFactsAdapter (
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.factText.text = item.text
+        holder.factText.text = item.fact
         holder.factUpvotes.text = item.upvotes.toString()
 
         with(holder.itemView) {

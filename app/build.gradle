@@ -22,9 +22,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    buildTypes.each {
-        it.buildConfigField 'String', "BASE_URL", "\"https://cat-fact.herokuapp.com\""
-    }
 
     androidExtensions {
         experimental = true
@@ -32,6 +29,20 @@ android {
 
     testOptions {
         unitTests.returnDefaultValues = true
+    }
+
+    flavorDimensions "api"
+    
+    productFlavors {
+        catFact {
+            dimension "api"
+            buildConfigField 'String', "BASE_URL", "\"https://cat-fact.herokuapp.com\""
+        }
+
+        catFactNinja {
+            dimension "api"
+            buildConfigField 'String', "BASE_URL", "\"https://catfact.ninja\""
+        }
     }
 }
 
